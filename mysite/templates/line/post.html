@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пост {{ post.title }}</title>
+</head>
+<body>
+
+<form action="http://127.0.0.1:8000/line/">
+    <button>*****</button>
+</form>
+
+<h3>{{ post.title }}</h3>
+<p>{{ post.date_posted }}</p>
+<p>posted by: {{ post.author }}</p>
+<p>{{ post.description }}</p>
+
+<p><img src="{{ post.photo.url }}" height="300" width="400"/></p>
+
+{% if user.is_authenticated %}
+<form action="http://127.0.0.1:8000/line/api/post/{{post.pk}}/like/">
+    <button type="submit">Красиво</button>
+</form>
+{% else %}
+<form action="http://127.0.0.1:8000/reg/signup/">
+    <button>Красиво</button>
+</form>
+{% endif %}
+
+</body>
+</html>
