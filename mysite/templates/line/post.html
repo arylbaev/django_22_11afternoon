@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Пост {{ post.title }}</title>
+
+
 </head>
 <body>
-
-<form action="http://127.0.0.1:8000/line/">
-    <button>*****</button>
+<h3>
+<form action="http://127.0.0.1:8000/line">
+    <button>Назад</button>
 </form>
-
+</h3>
 <h3>{{ post.title }}</h3>
 <p>{{ post.date_posted }}</p>
-<p>posted by: {{ post.author }}</p>
 <p>{{ post.description }}</p>
-
 <p><img src="{{ post.photo.url }}" height="300" width="400"/></p>
 
 {% if user.is_authenticated %}
-<form action="http://127.0.0.1:8000/line/api/post/{{post.pk}}/like/">
-    <button type="submit">Красиво</button>
+<form action="http://127.0.0.1:8000/line/{{ post.pk }}/{{ user.pk }}/like/">
+    <button class="red">Красиво</button>
 </form>
 {% else %}
 <form action="http://127.0.0.1:8000/reg/signup/">

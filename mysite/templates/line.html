@@ -21,9 +21,15 @@
 Здесь фотографии и тд
 <div>
     {% for p in posts %}
-      <a href="http://127.0.0.1:8000/line/{{ p.pk }}">
-          <p><img src="{{ p.photo.url }}" height="300" width="400"/></p>
-      </a>
+    {% if user.is_authenticated %}
+    <a href="http://127.0.0.1:8000/line/{{ p.pk }}/{{ user.pk }}">
+        <p><img src="{{ p.photo.url }}" height="300" width="400"/></p>
+    </a>
+    {% else %}
+    <a href="http://127.0.0.1:8000/line/{{ p.pk }}/{{ user.pk }}">
+        <p><img src="{{ p.photo.url }}" height="300" width="400"/></p>
+    </a>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
