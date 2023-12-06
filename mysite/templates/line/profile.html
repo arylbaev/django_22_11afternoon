@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+{% block content %}
+<p>{{ user.user_firstname }}</p>
+<p>{{ user.user_lastname }}</p>
+<p>{{ user.pseudo }}</p>
+{% if user.is_authenticated %}
+  <form action="http://127.0.0.1:8000/reg/signup">
+    <button> Subscribe </button>
+  </form>
+{% else %}
+  <p></p>
+  <form action="http://127.0.0.1:8000/reg/signup">
+    <button> Subscribe </button>
+  </form>
+{% endif %}
+<div>
+    {% for p in posts %}
+    <a href="http://127.0.0.1:8000/line/{{ p.pk }}">
+        <p><img src="{{ p.photo.url }}" height="300" width="400"/></p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пост {{ post.title }}</title>
+    <article
+      id="post_id"
+      data-postid="{{ post.pk }}">
+    </article>
+    <script type="text/javascript" src="{% static 'line/like.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'line/comment.js' %}">
+    </script>
+</head>
+{% csrf_token %}
+<body>
+<div id="user_info" user_id ="{{ user.pk }}" style="display: none;"></div>
+<div id="post_info" post_id ="{{ post.pk }}" style="display: none;"></div>
+<h3>{{ post.title }}</h3>
+<p>{{ post.date_posted }}</p>
+<p>{{ post.description }}</p>
+<form action="http://127.0.0.1:8000/line/profile/{{ post.author.pseudo }}/">
+  <button>{{ post.author }}</button>
+</form>
+<p><img src="{{ post.photo.url }}" height="300" width="400"/></p>
+
+<p >Кол-во лайков: </p>
+<p id="like_count" counter ="{{ post.likes.count }}"> {{ post.likes.count }} </p>
+{% if user.is_authenticated %}
+<button onclick="like()">Like</button>
+{% else %}
+<form action="http://127.0.0.1:8000/reg/signup/">
+    <button>Like</button>
+</form>
+{% endif %}
+
+{% if user.is_authenticated %}
+<form>
+  <input id="comment_form" type="text" name="Leave a comment">
+  <!--input type="submit"-->
+</form>
+<button form="comment_form" onclick="send_comment()">Send</button>
+{% else %}
+{% endif %}
+
+</body>
+</html>

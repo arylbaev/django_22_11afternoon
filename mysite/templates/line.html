@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Лента</title>
+</head>
+<body>
+{% block content %}
+{% if user.is_authenticated %}
+  Welcome, {{ user.username }}!
+
+  <form action="http://127.0.0.1:8000/reg/logout">
+    <button> Out </button>
+  </form>
+  <form action="http://127.0.0.1:8000/line/create_post/">
+    <button> Create a post </button>
+  </form>
+{% else %}
+  <p></p>
+  <form action="http://127.0.0.1:8000/reg/signup">
+    <button> Sign in or login </button>
+  </form>
+{% endif %}
+
+<div>
+    {% for p in posts %}
+    <a href="http://127.0.0.1:8000/line/{{ p.pk }}">
+        <p><img src="{{ p.photo.url }}" height="300" width="400"/></p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
